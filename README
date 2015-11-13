@@ -6,3 +6,6 @@ http://www.apc.univ-paris7.fr/APC_CS/Recherche/Adamis/MIDAS09/software/pures2hat
 See Grain, Stompor, and Tristam (2011),
 pureS2HAT: S2HAT-based Pure E/B Harmonic Transforms,
 http://ascl.net/1110.014
+
+Note: Current version only builds the external libraries.
+Python bindings themselves not yet written.
