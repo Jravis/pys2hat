@@ -1,0 +1,16 @@
+This is a version of the S2Hat package developed by
+Radek Stompor (APC, France); Mikolaj Szydlarski (INRIA, France;
+ANR-MIDAS'09); and Laura Grigori (INRIA, France), with
+other contributors.  It is distributed under the GNU
+General Public License (GPL), unclear which version
+(link is broken) but apparently v2 with permission given to use
+"either version 2 of the License, or (at your option) any
+later version."  The S2Hat package is hosted at and
+distributed through the following web page:
+http://www.apc.univ-paris7.fr/APC_CS/Recherche/Adamis/MIDAS09/software/s2hat/s2hat.html
+
+The code included here is v2.55 beta from 30 April 2012.
+This was the current version downloaded in Nov 2015.
+
+The build scripts using GNU development tools have been
+added by R. W. Ogburn, Nov. 2015.
