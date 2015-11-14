@@ -8,6 +8,9 @@ noinst_HEADERS = \
 
 # Fortran flags
 AM_FCFLAGS=-O3 -std=gnu -fno-second-underscore -ffixed-line-length-none -ffree-line-length-none
+# AM_FCFLAGS=-O3 -std=gnu -fno-underscoring -ffixed-line-length-none -ffree-line-length-none
+# AM_FCFLAGS=-O3 -std=gnu -ffixed-line-length-none -ffree-line-length-none
+# AM_CPPFLAGS=-Df2cFortran
 
 # C build:
 # .c:
@@ -24,6 +27,18 @@ libs2hat_a_SOURCES = \
         s2hat_map2alm.F90 \
         s2hat_c_interface.f90 \
         s2hat_c_wrappers.c
+
+bin_PROGRAMS = \
+        s2hat_f90_example \
+        s2hat_c_example
+
+s2hat_c_example_LDADD=./libs2hat.a -lmpifort
+s2hat_c_example_SOURCES = \
+        s2hat_example.c
+
+s2hat_f90_example_LDADD=./libs2hat.a
+s2hat_f90_example_SOURCES = \
+        s2hat_f90_example.f90
 
 clean:
 	rm -f *.o *.mod *.a

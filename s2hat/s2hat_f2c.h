@@ -68,7 +68,7 @@
 
   #define F77_APPEND_UNDERSCORE
 
-#elif defined(x86_64)
+#elif defined(x86_64) || defined(__x86_64__)
 
   #define F77_APPEND_UNDERSCORE
 
