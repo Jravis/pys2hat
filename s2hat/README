@@ -13,4 +13,6 @@ The code included here is v2.55 beta from 30 April 2012.
 This was the current version downloaded in Nov 2015.
 
 The build scripts using GNU development tools have been
-added by R. W. Ogburn, Nov. 2015.
+added by R. W. Ogburn, Nov. 2015.  Small modifications
+have been made to the code itself in some cases for
+successful build.
