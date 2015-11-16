@@ -1,6 +1,8 @@
-pyXPure
+pyS2Hat
 
-Python module for the use of pure-s2hat library:
+Python module for the use of the s2hat library
+
+Includes the pure-s2hat code:
 http://www.apc.univ-paris7.fr/APC_CS/Recherche/Adamis/MIDAS09/software/pures2hat/pureS2HAT.html
 
 See Grain, Stompor, and Tristam (2011),

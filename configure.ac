@@ -1,19 +1,37 @@
-AC_INIT([PyXPure], 0.1, [rwogburn@gmail.com])
+AC_INIT([PyS2Hat], 0.1, [rwogburn@gmail.com])
 AM_INIT_AUTOMAKE
-
-# Checks for programs. These may set default variables, such as CFLAGS
-# AC_PROG_CC
-# AC_PROG_FC
-AC_PROG_RANLIB
 
 # Use the C and Fortran language and compiler for the following checks
 AC_LANG(C)
 
-# Checks for libraries.
-AX_PROG_FC_MPI
-AX_PROG_CC_MPI
+# --------------------------------------------
+# Check whether we are to use real MPI installation or MPI stubs
+# --------------------------------------------
+AC_ARG_ENABLE(
+[mpi],
+[  --enable-mpi           Enable use of MPI (default: disabled)],
+[case "${enableval}" in
+  yes) use_mpi=yes ;;
+   no) use_mpi=no ;;
+    *) AC_MSG_ERROR([bad value ${enableval} for --enable-mpi option]) ;;
+esac],
+use_mpi=no)
 
-# Checks for header files.
+AM_CONDITIONAL(BUILD_MPI_STUBS, test x"$use_mpi" = xno)
+
+# Checks for programs. These may set default variables, such as CFLAGS
+AC_PROG_CPP
+if test x"$use_mpi" == xyes; then
+        # Use MPI compilers
+        AX_PROG_FC_MPI
+        AX_PROG_CC_MPI
+else
+        AC_PROG_CC
+        AC_PROG_FC
+fi
+AC_PROG_RANLIB
+
+# Checks for ehader files.
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdio.h])
 
@@ -63,6 +81,7 @@ AM_CONDITIONAL(S2HAT_FFT_FFTW3_HC2R, test x"$have_fftw3_hc2r" = xyes)
 AC_TYPE_SIZE_T
 
 AC_CONFIG_FILES([Makefile
+                 mpi_stubs/Makefile
                  s2hat/Makefile
                  pure_s2hat/Makefile])
 
