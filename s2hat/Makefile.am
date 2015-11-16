@@ -16,6 +16,11 @@ endif
 endif
 endif
 
+if USE_MPI
+else
+MPIINC=-I../mpi_stubs
+endif
+
 # The libraries to build
 noinst_LIBRARIES = libs2hat.a
 noinst_HEADERS = \
@@ -30,7 +35,9 @@ AM_FCFLAGS=-O3 -std=gnu -fno-second-underscore -ffixed-line-length-none -ffree-l
 # AM_FCFLAGS=-O3 -std=gnu -ffixed-line-length-none -ffree-line-length-none
 # AM_CPPFLAGS=-Df2cFortran
 
-AM_FCFLAGS += $(DFLAGS)
+AM_FCFLAGS += $(DFLAGS) $(MPIINC)
+
+AM_CPPFLAGS = $(MPIINC)
 
 # The files to add to the library and to the source distribution
 libs2hat_a_SOURCES = \

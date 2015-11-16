@@ -18,6 +18,7 @@ esac],
 use_mpi=no)
 
 AM_CONDITIONAL(BUILD_MPI_STUBS, test x"$use_mpi" = xno)
+AM_CONDITIONAL(USE_MPI, test x"$use_mpi" = xyes)
 
 # Checks for programs. These may set default variables, such as CFLAGS
 AC_PROG_CPP
