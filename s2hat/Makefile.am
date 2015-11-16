@@ -17,8 +17,11 @@ endif
 endif
 
 if USE_MPI
+MPILIB=-lmpifort
 else
 MPIINC=-I../mpi_stubs
+MPILIBFLAGS=-L../mpi_stubs
+MPILIB=-lmpi_stubs
 endif
 
 # The libraries to build
@@ -55,13 +58,13 @@ bin_PROGRAMS = \
         s2hat_f90_example \
         s2hat_c_example
 
-s2hat_c_example_LDFLAGS=-L.
-s2hat_c_example_LDADD=-ls2hat -lmpifort $(LDADD)
+s2hat_c_example_LDFLAGS=-L. $(MPILIBFLAGS)
+s2hat_c_example_LDADD=-ls2hat $(MPILIB) $(LDADD)
 s2hat_c_example_SOURCES = \
         s2hat_example.c
 
-s2hat_f90_example_LDFLAGS=-L.
-s2hat_f90_example_LDADD=-ls2hat $(LDADD)
+s2hat_f90_example_LDFLAGS=-L. $(MPILIBFLAGS)
+s2hat_f90_example_LDADD=$(MPILIB) -ls2hat $(LDADD)
 s2hat_f90_example_SOURCES = \
         s2hat_f90_example.f90
 
