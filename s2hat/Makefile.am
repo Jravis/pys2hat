@@ -17,11 +17,12 @@ endif
 endif
 
 if USE_MPI
-MPILIB=-lmpifort
+FORTLIB=-lmpifort
 else
 MPIINC=-I../mpi_stubs
 MPILIBFLAGS=-L../mpi_stubs
 MPILIB=-lmpi_stubs
+FORTLIB=-lgfortran
 endif
 
 # The libraries to build
@@ -59,7 +60,7 @@ bin_PROGRAMS = \
         s2hat_c_example
 
 s2hat_c_example_LDFLAGS=-L. $(MPILIBFLAGS)
-s2hat_c_example_LDADD=-ls2hat $(MPILIB) $(LDADD)
+s2hat_c_example_LDADD=-ls2hat $(MPILIB) $(LDADD) $(FORTLIB)
 s2hat_c_example_SOURCES = \
         s2hat_example.c
 
