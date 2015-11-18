@@ -59,13 +59,13 @@ static int PixelType_init(PixelType *self, PyObject *args, PyObject *kwds)
         return -1;
 
     if (pixchoice) {
-        if (strncasecmp(PyString_AsString(pixchoice),"healpix",10))
+        if (!strncasecmp(PyString_AsString(pixchoice),"healpix",10))
             pcnum = PIXCHOICE_HEALPIX;
-        else if (strncasecmp(PyString_AsString(pixchoice),"glesp",10))
+        else if (!strncasecmp(PyString_AsString(pixchoice),"glesp",10))
             pcnum = PIXCHOICE_GLESP;
-        else if (strncasecmp(PyString_AsString(pixchoice),"ecp",10))
+        else if (!strncasecmp(PyString_AsString(pixchoice),"ecp",10))
             pcnum = PIXCHOICE_ECP;
-        else if (strncasecmp(PyString_AsString(pixchoice),"glcp",10))
+        else if (!strncasecmp(PyString_AsString(pixchoice),"glcp",10))
             pcnum = PIXCHOICE_GLCP;
         else {
             PyErr_SetString(PyExc_ValueError, "Undefined pixelization choice string.");
@@ -79,10 +79,18 @@ static int PixelType_init(PixelType *self, PyObject *args, PyObject *kwds)
     }
 
     if (NULL == self->pixeltype) {
-        PyErr_SetString(PyExc_TypeError, "PixelType object has no pixtype struct allocated.");
-        return -1;
+        self->pixeltype = NULL;
+        self->pixeltype = (s2hat_pixeltype *)malloc(sizeof(s2hat_pixeltype));
+        if (self->pixeltype == NULL)
+        {
+            PyErr_SetString(PyExc_TypeError, "Failed to allocate memory for pixeltype struct.");
+            return -1;
+        }
     }
+    printf("Calling set_pixelization.\n");
+    printf("  pc=%d, par1=%d, par2=%d.\n", pcnum, pixpars.par1, pixpars.par2);
     set_pixelization(pcnum, pixpars, self->pixeltype);
+    printf("Returned.\n");
 
     return 0;
 }
@@ -137,7 +145,7 @@ static PyMethodDef pys2hat_methods[] = {
 #define PyMODINIT_FUNC void
 #endif
 PyMODINIT_FUNC
-inits2hat(void) 
+initpys2hat(void) 
 {
     PyObject* m;
 
